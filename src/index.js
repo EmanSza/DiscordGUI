@@ -1,6 +1,6 @@
 // We Require discord so we can interact with the API
 const discord = require('discord.js'); // We add Semi Colons to close off the statement. not closing the statement may cause issues in the future
-
+const InitateServer = require('./backend')
 
 // Statement for commands and Events
 const { registerCommands, registerEvents} = require('./utils/registry')
@@ -21,9 +21,10 @@ client.once('ready', () => {
 
 (async () => {
     client.login(TOKEN)
+    InitateServer(client);
     console.log('Bot is Starting Up!')
     client.commands = new discord.Collection();
 
-    await registerEvents(client, '../eventHandler')
-    await registerCommands(client, '../commands')
+    await registerEvents(client, '../eventHandlers');
+    await registerCommands(client, '../commands');
 })();

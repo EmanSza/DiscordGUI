@@ -1,48 +1,49 @@
-// Both FS and PATH are built into NODEJS
 const fs = require('fs').promises;
 const path = require('path');
 
 async function registerCommands(client, dir) {
     let files = await fs.readdir(path.join(__dirname, dir));
-    // This will loop thru each file
+    // Loop through each file.
     for(let file of files) {
         let stat = await fs.lstat(path.join(__dirname, dir, file));
-        if(stat.isDirectory()) // If the file is a directory, recursive call recurDir
-            registerCommands(client, path.join(dir, file)); 
-            else {
-                // Chekc if the file is a JS file
-                if(file.endsWith(".js")) {
-                    try {
-                        let cmdModule = require(path.join(__dirname, dir, file));
-                        let { aliases } = cmdModule
-                        client.commands.set(cmdModule.name, cmdModule)
-                        if(aliases && aliases.length !== 0)
+        if(stat.isDirectory()) // If file is a directory, recursive call recurDir
+            registerCommands(client, path.join(dir, file));
+        else {
+            // Check if file is a .js file.
+            if(file.endsWith(".js")) {
+                let cmdName = file.substring(0, file.indexOf(".js"));
+                try {
+                    let cmdModule = require(path.join(__dirname, dir, file));
+                    let { aliases } = cmdModule;
+                    client.commands.set(cmdName, cmdModule);
+                    if(aliases.length !== 0)
                         aliases.forEach(alias => client.commands.set(alias, cmdModule));
-                    }
-                    catch(err) {
-                        console.log(err)
-                    }
+                }
+                catch(err) {
+                    console.log(err);
                 }
             }
+        }
     }
-    async function registerEvents(client, dir) {
-        let files = await fs.readdir(path.join(__dirname, dir));
-        // Loop through each file.
-        for(let file of files) {
-            let stat = await fs.lstat(path.join(__dirname, dir, file));
-            if(stat.isDirectory()) // If file is a directory, recursive call recurDir
-                registerEvents(client, path.join(dir, file));
-            else {
-                // Check if file is a .js file.
-                if(file.endsWith(".js")) {
-                    let eventName = file.substring(0, file.indexOf(".js"));
-                    try {
-                        let eventModule = require(path.join(__dirname, dir, file));
-                        client.on(eventName, eventModule.bind(null, client));
-                    }
-                    catch(err) {
-                        console.log(err);
-                    }
+}
+
+async function registerEvents(client, dir) {
+    let files = await fs.readdir(path.join(__dirname, dir));
+    // Loop through each file.
+    for(let file of files) {
+        let stat = await fs.lstat(path.join(__dirname, dir, file));
+        if(stat.isDirectory()) // If file is a directory, recursive call recurDir
+            registerEvents(client, path.join(dir, file));
+        else {
+            // Check if file is a .js file.
+            if(file.endsWith(".js")) {
+                let eventName = file.substring(0, file.indexOf(".js"));
+                try {
+                    let eventModule = require(path.join(__dirname, dir, file));
+                    client.on(eventName, eventModule.bind(null, client));
+                }
+                catch(err) {
+                    console.log(err);
                 }
             }
         }
@@ -50,6 +51,6 @@ async function registerCommands(client, dir) {
 }
 
 module.exports = {
-    registerEvents,
-    registerCommands
+    registerEvents, 
+    registerCommands 
 };

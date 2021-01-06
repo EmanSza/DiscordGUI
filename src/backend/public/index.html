@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" type = "text/css" href = "./stylesheet.css" />
+        <title>
+            Message Form
+        </title>
+    </head>
+    <body>
+        <form method="POST" action="/send-message">
+        <input id="channel type="text" value="ChannelID" name="channel" required pattern="\d{18}" />
+        <input id="message" type="text" value="Message" name="message" required />
+        <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>

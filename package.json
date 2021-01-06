@@ -1,15 +1,21 @@
 {
   "dependencies": {
-    "discord.js": "^12.5.1"
+    "concurrently": "^5.3.0",
+    "discord.js": "^12.5.1",
+    "express": "^4.17.1"
   },
   "name": "nodegui",
   "version": "1.0.0",
   "main": "./src/index.js",
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"node .\" \"electron ./src/native\"",
+    "gui": "electron ./src/native"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "electron": "^11.1.1"
+  }
 }
