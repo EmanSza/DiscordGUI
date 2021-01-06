@@ -1,5 +1,4 @@
 const { app, BrowserWindow } = require('electron')
-
 function createWindow () {
   const win = new BrowserWindow({
     width: 800,
@@ -8,8 +7,9 @@ function createWindow () {
       nodeIntegration: true
     }
   })
-
-  win.loadURL('http://localhost:3000/')
+  win.loadURL('http://localhost:3000/');
+  //win.removeMenu(null);
+  // win.loadFile('../backend/public/index.html')
 }
 
 app.whenReady().then(createWindow)
