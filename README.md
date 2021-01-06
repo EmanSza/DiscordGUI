@@ -3,7 +3,7 @@
 
 This Project can be used FOR FREE but unless given Premission BY EmanSza please give me some credit as this project will/has take alot of time
 
-Project verison: 0.01
+Project verison: 0.02
 ## How to Turn on the Bot
 Turn it on with both GUI and Bot
 ```javascript
