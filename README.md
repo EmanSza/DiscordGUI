@@ -1,5 +1,5 @@
-## This Project is Developed by EmanSza
-## or Help/Informaiton Please Contact me here EmanSza#5474
+## This Project is Developed by | EmanSza | Cursors | Townsy
+## or Help/Informaiton Please Contact me here EmanSza#5474 | [Cursors]#9257 | Townsy#0001
 
 This Project can be used FOR FREE but unless given Premission BY EmanSza please give me some credit as this project will/has take alot of time
 
